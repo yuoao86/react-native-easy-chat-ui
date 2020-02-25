@@ -61,15 +61,7 @@ export default class VoiceView extends PureComponent {
   show () {
     this.setState({
       isShow: true
-    })
-    Animated.timing(
-      this.state.opacityValue,
-      {
-        toValue: this.props.opacity,
-        duration: this.props.fadeInDuration
-      }
-    ).start()
-    this._record()
+    },this._record)
   }
 
   async close () {
@@ -98,19 +90,10 @@ export default class VoiceView extends PureComponent {
   }
 
   delayClose () {
-    Animated.timing(
-      this.state.opacityValue,
-      {
-        toValue: 0.0,
-        duration: this.props.fadeOutDuration
-      }
-    ).start(() => {
-      this.setState({
+    this.setState({
         isShow: false,
         error: false
-      })
-      this.props.setAudioHandle(true)
-    })
+      },() => this.props.setAudioHandle(true))
   }
 
   async _pause () {
